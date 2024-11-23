@@ -1,7 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Container, Form, Button } from 'react-bootstrap'
 import useInventory from '../hooks/useInventory'
-import { useState } from 'react'
 
 const NewProductForm = () => {
 
@@ -10,8 +9,6 @@ const NewProductForm = () => {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const [category, setCategory] = useState('');
-    
-    const postInventory = useInventory('POST', null)
 
     const productData = { 
         "title": title, 
@@ -21,8 +18,11 @@ const NewProductForm = () => {
         "category": category
     };
 
-    const handleSubmission = (event) => {
+    const postInventory = useInventory('POST', productData)
 
+    const handleSubmission = (event) => {
+        event.preventDefault()
+        console.log(productData)
         postInventory(event, productData);
     }
 
@@ -43,7 +43,7 @@ const NewProductForm = () => {
                 <Form.Group>
                     <Form.Label>Price:</Form.Label>
                     <Form.Control
-                        type="text"
+                        type="number"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                     />
