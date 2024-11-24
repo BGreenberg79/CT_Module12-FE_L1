@@ -6,9 +6,9 @@ const useInventory = (method, productId = null) => {
     const [inventory, setInventory] = useState([]);
 
 
-    switch (method) {
-        case 'GET':
+    
             useEffect(() => {
+                if (method === 'GET') {
                 const fetchInventory = async () => {
                     try{
                         const response = await axios.get('https://fakestoreapi.com/products');
@@ -19,13 +19,15 @@ const useInventory = (method, productId = null) => {
                     }
                 }
 
-                fetchInventory();
-            }, []);
-
-        return inventory;
+                fetchInventory();}
+            }, [method]);
+            
+    switch (method) {
+        case 'GET':
+            return inventory;
     
 
-    case 'POST':
+    case 'POST':{
             const submitProduct = async (productData) => {
             
                 try {
@@ -37,10 +39,10 @@ const useInventory = (method, productId = null) => {
                 };
             }
             return submitProduct;
-            
+        }
             
 
-    case 'DELETE':
+    case 'DELETE':{
         const deleteProduct = async (productId) => {
             try {
                 await axios.delete(`https://fakestoreapi.com/products/${productId}`);
@@ -50,6 +52,7 @@ const useInventory = (method, productId = null) => {
             }
         };
         return deleteProduct;
+    }
     default:
         return null;
     };

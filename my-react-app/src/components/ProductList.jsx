@@ -5,10 +5,7 @@ import { Container, ListGroup, Button } from 'react-bootstrap'
 const ProductList = () => {
 
     const inventoryList = useInventory('GET', null)
-    const deleteProduct = (productId) => {
-        const deletion = useInventory('DELETE', productId);
-        deletion();
-    };
+    const deleteProduct = useInventory('DELETE')
 
 return (
     <Container>
