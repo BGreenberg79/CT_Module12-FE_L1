@@ -23,7 +23,7 @@ const NewProductForm = () => {
     const handleSubmission = (event) => {
         event.preventDefault()
         console.log(productData)
-        postInventory(event, productData);
+        postInventory(productData);
     }
 
   return (

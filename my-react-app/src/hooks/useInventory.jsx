@@ -45,8 +45,9 @@ const useInventory = (method, productId = null) => {
     case 'DELETE':{
         const deleteProduct = async (productId) => {
             try {
-                await axios.delete(`https://fakestoreapi.com/products/${productId}`);
+                const response= await axios.delete(`https://fakestoreapi.com/products/${productId}`);
                 setInventory((prevList) => prevList.filter((product) => product.id !== productId));
+                console.log(response)
             } catch (error) {
                 console.error('Error deleting product:', error);
             }
